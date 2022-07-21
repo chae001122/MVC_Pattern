@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 테스트</title>
+</head>
+<body>
+    <a href="/add" class="btn btn-success">
+    <i class="fas fa-user-plus ml-2"> Add Product </i></a>
+    <h1>상품 목록 조회</h1>
+    <table border="1">
+        <th>상품 번호</th>
+        <th>상품 이름</th>
+        <th>상품 가격</th>
+        <th>등록 날짜</th>
+        <th>수정 날짜</th>
+    <tbody>
+    <tr th:each="product : ${productList}">
+        <td th:text="${product.productNo}"></td>
+        <td th:text="${product.productName}"></td>
+        <td th:text="${product.salePrice}"></td>
+        <td th:text="${product.registerYmdt}"></td>
+        <td th:text="${product.updateYmdt}"></td>
+        <td><a th:href="@{/see/{id}(id=${product.productNo})}"
+               class="btn btn-danger">
+            <i class="fas fa-user-times ml-2">confirm</i>
+        </a></td>
+        <td><a th:href="@{/edit/{id}(id=${product.productNo})}"
+               class="btn btn-warning"> <i
+                class="fas fa-user-edit ml-2">modify</i>
+        </a></td>
+        <td><a th:href="@{/delete/{id}(id=${product.productNo})}"
+               class="btn btn-danger">
+            <i class="fas fa-user-times ml-2">delete</i>
+        </a></td>
+    </tr>
+    </tbody>
+    </table>
+</body>
+</html>
