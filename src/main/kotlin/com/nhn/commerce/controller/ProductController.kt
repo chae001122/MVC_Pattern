@@ -57,8 +57,10 @@ class ProductController(
         println(product)
         productService.create(product)
         println(product)
+
         return "redirect:/product";
     }
+    fun Int.isPositive(): Boolean = this > 0
     // TODO (상품 수정 기능 + Exception 처리)
     @GetMapping(path = ["/edit/{productNo}"])
     fun editUserById(model: Model, @PathVariable("productNo") productNo: Int): String? {
@@ -68,8 +70,23 @@ class ProductController(
 
     @PostMapping(path = ["/editUser"])
     fun editUser(@ModelAttribute product: Product): String? {
-        productService.create(product)
-        return "redirect:/product"
+        try{
+            product.salePrice.also{
+                if(product.salePrice.isPositive()){
+                    println("-------------------")
+                    println(product.salePrice)
+                    println("---------------------")
+                    productService.create(product)
+                }else{
+                    println("추가 불가능 : 판매금액이 음수입니다.")
+                    throw Error("판매 금액 음수 에러")
+                }
+            }
+        }catch(e:Error){
+            println(e)
+        }finally {
+            return "redirect:/product"
+        }
     }
 
 

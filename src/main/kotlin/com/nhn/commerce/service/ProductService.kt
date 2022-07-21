@@ -21,22 +21,6 @@ class ProductService(
     @Transactional
     fun create(product: Product) {
         productRepository.save(product)
-//        try{
-//            val newProduct = product.let {
-//                "{상품이름 : ${product.productName}, 상품 가격 : ${product.salePrice}}"
-//            }
-//            println("상품 정보 확인")
-//            println(newProduct)
-//            println("====================")
-//
-//            val productPrice:Int = product.salePrice.toInt()
-//            if(productPrice.isPositive())
-//                throw Exception("가격은 양수여야 합니다.")
-//
-//            productRepository.save(product)
-//        } catch (e: NumberFormatException) {
-//            throw Exception("Not Number : 가격 입력값은 숫자로 이뤄져야 합니다.")
-//        }
     }
 
     @Transactional
